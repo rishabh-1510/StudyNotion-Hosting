@@ -1,4 +1,4 @@
-const { useActionData } = require("react-router-dom");
+const crypto = require("crypto");
 const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
@@ -25,7 +25,7 @@ exports.resetPasswordToken = async (req , res)=>{
             resetPassword:Date.now() + 5*60*1000
         },{new:true}); 
         //create url
-        const url = `htttp"//localhost:3000/update-password/${token}`
+        const url =`http://localhost:3000/update-password/${token}`
 
         //send mail containing the url
         await mailSender(email,"Password Reset Link" , `Password Reset Link : ${url}`);
