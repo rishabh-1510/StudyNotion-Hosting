@@ -13,8 +13,8 @@ import Exploremore from '../components/core/HomePage/Exploremore';
 import ReviewSlider from '../components/common/ReviewSlider';
 import { useSelector } from 'react-redux';
 const Home = () => {
+  const {token} = useSelector((state)=>state.auth);
   return (
-    const {token} = useSelector((state)=>state.auth);
     <div>
         {/* Section1 */}
         <div className='relative mx-auto flex flex-col w-[80%] max-w-maxContent items-center 
