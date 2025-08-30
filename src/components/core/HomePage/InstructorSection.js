@@ -3,6 +3,7 @@ import Instructor from '../../../assets/Images/Instructor.png';
 import HighlightText from './HiglightText';
 import CTAButton from './CTAButton';
 import { FaArrowRight } from 'react-icons/fa';
+const {token} = useSelector((state)=>state.auth);
 const InstructorSection = () => {
   const {token} = useSelector((state)=>state.auth)
   return (
