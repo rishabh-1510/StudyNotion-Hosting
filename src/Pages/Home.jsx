@@ -38,7 +38,7 @@ const Home = () => {
                  and personalized feedback from instructors. 
             </div>
             <div className='flex lg:flex-row gap-7 mt-8 sm:flex-col '>
-                <CTAButton active={true} linkto={token?"/": "/signup">
+                <CTAButton active={true} linkto={token?"/": "/signup"}>
                     Learn More
                 </CTAButton>
 
