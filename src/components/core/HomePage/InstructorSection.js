@@ -4,6 +4,7 @@ import HighlightText from './HiglightText';
 import CTAButton from './CTAButton';
 import { FaArrowRight } from 'react-icons/fa';
 const InstructorSection = () => {
+  const {token} = useSelector((state)=>state.auth)
   return (
     <div className='mt-16'>
         <div className='flex flex-row gap-20 items-center'>
@@ -19,7 +20,7 @@ const InstructorSection = () => {
                     Instructors from around the world tech millions of students on StudyNotion. We provide the tools and skills to teach what you love  
                 </p>
                 <div className='w-fit '>
-                    <CTAButton active={true} linkto={"/signup"} >
+                    <CTAButton active={true} linkto={token?"/":"/signup"} >
                     <div className='flex flex-row gap-2 items-center '>
                         Start Learning Today
                         <FaArrowRight />
