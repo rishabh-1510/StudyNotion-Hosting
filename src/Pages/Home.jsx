@@ -116,7 +116,7 @@ const Home = () => {
                 <div  className='w-11/12 max-w-content flex flex-col items-center gap-5 mx-auto'>
                     <div className='h-[150px]'></div>
                     <div className='flex lg:flex-row gap-7 text-white sm:flex-col'>
-                         <CTAButton active={true} linkto={token?/"":"/signup"}>
+                         <CTAButton active={true} linkto={token?"/":"/signup"}>
                             <div className='flex flex-row items-center justify-center gap-3'>
                                 <div>
                                 Explore all Catalog
