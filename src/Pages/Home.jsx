@@ -11,9 +11,10 @@ import InstructorSection from '../components/core/HomePage/InstructorSection';
 import Footer from "../components/common/Footer";
 import Exploremore from '../components/core/HomePage/Exploremore';
 import ReviewSlider from '../components/common/ReviewSlider';
-
+import { useSelector } from 'react-redux';
 const Home = () => {
   return (
+    const {token} = useSelector((state)=>state.auth);
     <div>
         {/* Section1 */}
         <div className='relative mx-auto flex flex-col w-[80%] max-w-maxContent items-center 
@@ -37,11 +38,11 @@ const Home = () => {
                  and personalized feedback from instructors. 
             </div>
             <div className='flex lg:flex-row gap-7 mt-8 sm:flex-col '>
-                <CTAButton active={true} linkto={"/signup"}>
+                <CTAButton active={true} linkto={token?"/": "/signup">
                     Learn More
                 </CTAButton>
 
-                <CTAButton active={false} linkto={"/login"}>
+                <CTAButton active={false} linkto={token?"/":"/login"}>
                     Book a Demo
                 </CTAButton>  
             </div>
@@ -64,13 +65,13 @@ const Home = () => {
                 <HighlightText text={" coding potential"}/> with our online courses</div>} subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you"}
                     ctabtn1={{
                         btnText :"Try it Yourself",
-                        linkto:"/signup",
+                        linkto={token?"/catalog/devops":"/signup"},
                         active:true,
                         
                     }}
                     ctabtn2={{
                         btnText :"Learn More",
-                        linkto:"/login",
+                        linkto={token?"/catalog/devops":"/login"},
                         active:false,
                         
                     }}
@@ -88,13 +89,13 @@ const Home = () => {
                 <HighlightText text={" coding potential"}/> with our online courses</div>} subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you"}
                     ctabtn1={{
                         btnText :"Try it Yourself",
-                        linkto:"/signup",
+                        linkto:token?"/":"/signup",
                         active:true,
                         
                     }}
                     ctabtn2={{
                         btnText :"Learn More",
-                        linkto:"/login",
+                        linkto:token?"/":"/login",
                         active:false,
                         
                     }}
@@ -115,7 +116,7 @@ const Home = () => {
                 <div  className='w-11/12 max-w-content flex flex-col items-center gap-5 mx-auto'>
                     <div className='h-[150px]'></div>
                     <div className='flex lg:flex-row gap-7 text-white sm:flex-col'>
-                         <CTAButton active={true} linkto={"/signup"}>
+                         <CTAButton active={true} linkto={token?/"":"/signup"}>
                             <div className='flex flex-row items-center justify-center gap-3'>
                                 <div>
                                 Explore all Catalog
@@ -124,7 +125,7 @@ const Home = () => {
                             </div>
                             
                          </CTAButton>
-                         <CTAButton active={false} linkto={"/signup"}>
+                         <CTAButton active={false} linkto={token?"/":"/signup"}>
                             <div>
                                 Learn more
 
@@ -147,7 +148,7 @@ const Home = () => {
                         
                         </div>
                         <div>
-                            <CTAButton active={true} >
+                            <CTAButton active={true} linkto={token?"/":"/signup"}>
                                 Learn More
                             </CTAButton>
                         </div>
