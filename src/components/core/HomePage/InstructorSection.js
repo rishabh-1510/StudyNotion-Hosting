@@ -3,9 +3,9 @@ import Instructor from '../../../assets/Images/Instructor.png';
 import HighlightText from './HiglightText';
 import CTAButton from './CTAButton';
 import { FaArrowRight } from 'react-icons/fa';
-const {token} = useSelector((state)=>state.auth);
+import {useSelector} from "react-redux";
 const InstructorSection = () => {
-  const {token} = useSelector((state)=>state.auth)
+  const {token} = useSelector((state)=>state.auth);
   return (
     <div className='mt-16'>
         <div className='flex flex-row gap-20 items-center'>
