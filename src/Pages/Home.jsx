@@ -65,13 +65,13 @@ const Home = () => {
                 <HighlightText text={" coding potential"}/> with our online courses</div>} subheading={"Our courses are designed and taught by industry experts who have years of experience in coding and are passionate about sharing their knowledge with you"}
                     ctabtn1={{
                         btnText :"Try it Yourself",
-                        linkto=token?"/catalog/devops":"/signup",
+                        linkto:token?"/catalog/devops":"/signup",
                         active:true,
                         
                     }}
                     ctabtn2={{
                         btnText :"Learn More",
-                        linkto=token?"/catalog/devops":"/login",
+                        linkto:token?"/catalog/devops":"/login",
                         active:false,
                         
                     }}
