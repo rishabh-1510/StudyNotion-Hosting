@@ -22,6 +22,7 @@ const {
   GET_FULL_COURSE_DETAILS_AUTHENTICATED,
   CREATE_RATING_API,
   LECTURE_COMPLETION_API,
+   PURCHASE_HISTORY_API
 } = courseEndpoints
 
 
@@ -408,3 +409,25 @@ export const getCourseCompletedLectures = async(data,token)=>{
 
     
 }
+
+export const fetchPurchaseHistory = async(userId , token) => {
+  let result = []
+  const toastId = toast.loading("Loading...");
+  try {
+    const response = await apiConnector("GET", PURCHASE_HISTORY_API, {userId}, {
+      Authorization: `Bearer ${token}`,
+    });
+   
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Purchase History");
+    } 
+    result = response?.data?.data;
+   
+    toast.dismiss(toastId);
+    return result;
+  } catch (error){
+    console.log("PURCHASE HISTORY API ERROR............", error);
+    toast.error(error.message); 
+    toast.dismiss(toastId);          
+   }
+  } 
