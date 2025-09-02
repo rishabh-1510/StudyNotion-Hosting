@@ -9,7 +9,8 @@ const {createSubSection,updateSubsection,deleteSubsection} = require("../control
 const{createRating , getAverageRating,getAllratingAndReviews} = require("../controllers/ratingandreview");
 
 const{auth,isStudent,isAdmin,isInstructor} = require("../middlewares/auth");
-const {updateCourseProgress , getCourseCompletedLectures} = require("../controllers/CourseProgress")
+const {updateCourseProgress , getCourseCompletedLectures} = require("../controllers/CourseProgress");
+const {getPurchaseHistory} = require("../controllers/Purchasehistory");
 
 // Courses can Only be Created by Instructors
 Router.post("/createCourse", auth, isInstructor, createCourse)
@@ -36,6 +37,9 @@ Router.post("/getCourseDetails", getCoursedetails)
 Router.post("/getFullCourseDetails", auth, getFullCourseDetails)
 // Delete a Course
 Router.delete("/deleteCourse", deleteCourse)
+
+//Puraachase history of a user
+Router.get("/getPurchaseHistory", auth, isStudent, getPurchaseHistory);
 
 //update course progress
 Router.post("/updateCourseProgress", auth , isStudent,updateCourseProgress);
