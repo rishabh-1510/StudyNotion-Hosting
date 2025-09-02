@@ -8,7 +8,7 @@ const { paymentSuccessEmail } = require("../mail/templates/paymentSuccessEmail")
 const crypto = require('crypto');
 const CourseProgress = require("../models/courseProgress");
 require("dotenv").config();
-
+const PurchaseHistory = require("../models/PurchaseHistory");
 //initiate the  razorpay order
 exports.capturePayment = async(req,res)=>{
     const {courses} = req.body;
@@ -58,7 +58,7 @@ exports.capturePayment = async(req,res)=>{
         res.json({
             sucess:true,
             message:paymentResponse ,
-            razorpayKey: process.env.RAZORPAY_KEY,
+            razorpayKey: process.env.RAZORPAY_API_KEY,
         })
     }catch(err){
         console.log(err);
@@ -83,10 +83,10 @@ exports.verifyPayment = async(req,res)=>{
             message:"Payment failed"
         })
     }
-    console.log("RAZORPAY_SECRET", process.env.RAZORPAY_SECRET)
+    console.log("RAZORPAY_SECRET", process.env.RAZORPAY_API_SECRET)
     let body = razorpay_order_id +"|"+razorpay_payment_id;
     const expectedSignature = crypto
-        .createHmac("sha256",process.env.RAZORPAY_SECRET)
+        .createHmac("sha256",process.env.RAZORPAY_API_SECRET)
         .update(body.toString())
         .digest("hex");
 
@@ -119,7 +119,7 @@ const enrollStudents = async(courses , userId , res)=>{
                     success:false,
                     message:"Course not found",                  
                 })
-            }
+            }               
 
             const courseProgress = await CourseProgress.create({
                 courseId:courseId,
@@ -131,12 +131,11 @@ const enrollStudents = async(courses , userId , res)=>{
                 user:userId,
                 course:courseId,
                 purchasedAt:Date.now(),});
-
             //find std and add course in enrolled courses
             const enrolledStudent = await User.findByIdAndUpdate(userId ,{$push:{courses:courseId , CourseProgress:courseProgress._id}, }, {new:true})
             // mail send
             const emailresponse = await mailSender(
-                enrollStudents.email,
+                enrolledStudent.email,
                 `Successfully Enrolled into ${enrolledCourse.courseName}`,
                 courseEnrollmentEmail(enrolledCourse.courseName , `${enrolledStudent.firstName}`)
 
