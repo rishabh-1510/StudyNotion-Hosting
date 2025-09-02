@@ -127,6 +127,10 @@ const enrollStudents = async(courses , userId , res)=>{
                 completedVideos:[],   
 
             })
+            const History = await PurchaseHistory.create({
+                user:userId,
+                course:courseId,
+                purchasedAt:Date.now(),});
 
             //find std and add course in enrolled courses
             const enrolledStudent = await User.findByIdAndUpdate(userId ,{$push:{courses:courseId , CourseProgress:courseProgress._id}, }, {new:true})
