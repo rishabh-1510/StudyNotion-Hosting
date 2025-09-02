@@ -43,6 +43,7 @@ export const courseEndpoints = {
   LECTURE_STATUS_API :BASE_URL +"/course//getCourseProgress",
   CREATE_RATING_API: BASE_URL + "/course/createRating",
   COURSE_COMPLETED_VIDEOS :BASE_URL+"/course/getCourseCompletedLectures",
+  PURCHASE_HISTORY_API :BASE_URL+"/course/getPurchaseHistory",
 }
 
 // RATINGS AND REVIEWS
