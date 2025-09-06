@@ -55,12 +55,14 @@ export function updateProfile(token, formData) {
       if (!response.data.success) {
         throw new Error(response.data.message)
       }
-      const userImage = response.data.updatedUserDetails.image
+      console.log("Updated User Details", response?.data?.updatedUserDetails)
+      const userImage = response?.data?.updatedUserDetails?.image
         ? response.data.updatedUserDetails.image
-        : `https://api.dicebear.com/5.x/initials/svg?seed=${response.data.updatedUserDetails.firstName} ${response.data.updatedUserDetails.lastName}`
+        : `https://api.dicebear.com/5.x/initials/svg?seed=${response?.data?.updatedUserDetails?.firstName} ${response?.data?.updatedUserDetails?.lastName}`
+     
       dispatch(
         setUser({ ...response.data.updatedUserDetails, image: userImage })
-      )
+      ) 
       localStorage.setItem("user", JSON.stringify(response.data.updatedUserDetails));
       toast.success("Profile Updated Successfully")
     } catch (error) {
@@ -70,7 +72,6 @@ export function updateProfile(token, formData) {
     toast.dismiss(toastId)
   }
 }
-
 export async function changePassword(token, formData) {
   const toastId = toast.loading("Loading...")
   try {
