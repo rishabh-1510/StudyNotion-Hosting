@@ -40,7 +40,7 @@ const navigate = useNavigate();
             user?.additionalDetails?.about
               ? "text-richblack-5"
               : "text-richblack-400"
-          } text-sm font-medium`}>{user?.additonalDetails?.about ?? "Write Something about Yourself"}</p>
+          } text-sm font-medium`}>{user?.additionalDetails?.about ?? "Write Something about Yourself"}</p>
 
         </div>
         
