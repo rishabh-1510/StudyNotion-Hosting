@@ -13,7 +13,7 @@ exports.createCourse = async (req,res)=>{
         let {courseName , courseDescription , whatYouWillLearn,price ,tag:_tag, category ,status ,instructions:_instructions} = req.body;
         const thumbnail =req.files.thumbnailImage;
             const tag = JSON.parse(_tag)
-            const instructions = JSON.parse(_instructions)
+            const instructions = JSON.parse(_instructions);
         //validation
         if(!courseName || !courseDescription || !whatYouWillLearn || !category || !price ||!tag.length  || !thumbnail){
             return res.status(401).json({
@@ -233,7 +233,7 @@ exports.editCourse = async (req, res) => {
         },
       })
       .populate("category")
-    //   .populate("ratingAndReviews")
+      .populate("ratingReviews")
       .populate({
         path: "courseContent",
         populate: {
