@@ -25,7 +25,7 @@ exports.resetPasswordToken = async (req , res)=>{
             resetPassword:Date.now() + 5*60*1000
         },{new:true}); 
         //create url
-        const url =`https://studynotion-backend-x2az.onrender.com/update-password/${token}`
+        const url =`https://studynotion-frontend-sandy-psi.vercel.app//update-password/${token}`
 
         //send mail containing the url
         await mailSender(email,"Password Reset Link" , `Password Reset Link : ${url}`);
