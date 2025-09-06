@@ -4,6 +4,7 @@ import { resetPassword } from '../services/operations/authApi';
 import { useLocation } from 'react-router-dom';
 import {AiFillEyeInvisible , AiFillEye} from 'react-icons/ai';
 import { Link } from 'react-router-dom';
+import { BiArrowBack } from 'react-icons/bi';
 const UpdatePassword = () => {
     const [formdata ,setFormData] = useState({
         password:"",
@@ -31,56 +32,55 @@ const UpdatePassword = () => {
         dispatch(resetPassword(password ,confirmPassword , token));
     }
   return (
-    <div  className='text-white'>
+    <div className="grid min-h-[calc(100vh-3.5rem)] place-items-center">
         {
-            loading? (<div>
-                Loading...
+            loading? (<div className='spinner'>
             </div>):(
-                <div>
-                    <h1>Choose new Password</h1>
-                    <p>Almost done. Enter your new password and you are all set. </p>
+                <div className="max-w-[500px] p-4 lg:p-8">
+                    <h1 className="text-[1.875rem] font-semibold leading-[2.375rem] text-richblack-5">Choose new Password</h1>
+                    <p className="my-4 text-[1.125rem] leading-[1.625rem] text-richblack-100">Almost done. Enter your new password and you are all set. </p>
                     <form onSubmit={handleOnSubmit}>
-                        <label>
-                            <p>New Password*</p>
+                        <label className="relative">
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">New Password <sup className='text-pink-200'>*</sup></p>
                             <input
                                 required
                                 type={showPass?"text":"password"}
                                 name='password'
                                 value={password}
-                                className='w-full p-6 bg-richblack-600 text-richblack-5'
                                 onChange={handleOnChange}
+                                className="form-style w-full !pr-10"
                             />
-                            <span onClick={()=>setShowPass((prev)=>!prev)} >
+                            <span onClick={()=>setShowPass((prev)=>!prev)} className="absolute right-3 z-[10] cursor-pointer">
                                 {
-                                    showPass?(<AiFillEyeInvisible fontSize={24}/>)
-                                    :(<AiFillEye fontSize={24}/>)
+                                    showPass?(<AiFillEyeInvisible fontSize={24} fill="#AFB2BF"/>)
+                                    :(<AiFillEye fontSize={24} fill="#AFB2BF"/>)
                                 }
                             </span>
                         </label>
-                        <label>
-                            <p>Confirm Password*</p>
+                        <label className="relative mt-3 block">
+                            <p className="mb-1 text-[0.875rem] leading-[1.375rem] text-richblack-5">Confirm Password <sup className='text-pink-200'>*</sup></p>
                             <input
                                 required
                                 type={showConfirmPass?"text":"password"}
                                 name='confirmPassword'
                                 value={confirmPassword}
                                 onChange={handleOnChange}
-                                className='w-full p-6 bg-richblack-600 text-richblack-5'
+                                className="form-style w-full !pr-10"
                             />
-                            <span onClick={()=>setShowConfirmPass((prev)=>!prev)} >
+                            <span onClick={()=>setShowConfirmPass((prev)=>!prev)} className="absolute right-3 z-[10] cursor-pointer">
                                 {
-                                    showConfirmPass?(<AiFillEyeInvisible fontSize={24}/>)
-                                    :(<AiFillEye fontSize={24}/>)
+                                    showConfirmPass?(<AiFillEyeInvisible fontSize={24} fill="#AFB2BF"/>)
+                                    :(<AiFillEye fontSize={24} fill="#AFB2BF"/>)
                                 }
                             </span>
                         </label>
-                        <button type='submit' >
+                        <button type='submit' className="mt-6 w-full rounded-[8px] bg-yellow-50 py-[12px] px-[12px] font-medium text-richblack-900">
                             Reset Password
                         </button>
                     </form>
-                    <div>
+                    <div className="mt-6 flex items-center justify-between">
                         <Link to="/login">
-                            <p>Back to Login</p>
+                            <p className="flex items-center gap-x-2 text-richblack-5"> <BiArrowBack/>Back to Login</p>
                         </Link>
                     </div>
                 </div>
