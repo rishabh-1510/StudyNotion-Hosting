@@ -221,13 +221,25 @@ exports.login = async(req,res)=>{
 exports.changePassword = async (req,res)=>{
     try{
             //get data from req
-        const {email , oldPassword , newPassword , confirmPassword} = req.body;
+        const {email , oldPassword , newPassword } = req.body;
         //get old password , new password , confirmpassword
         //validation
-        if(!email || !oldPassword || !newPassword || !confirmPassword){
+        if(!email){
             return res.status(402).json({
                 success:false,
-                message:"Fill all the details properly",
+                message:"Fill email properly",
+            })
+        }
+        if(!oldPassword){
+            return res.status(402).json({
+                success:false,
+                message:"Fill op properly",
+            })
+        }
+        if(!newPassword){
+            return res.status(402).json({
+                success:false,
+                message:"Fill np properly",
             })
         }
         const mail =await User.findOne({email})
@@ -246,12 +258,7 @@ exports.changePassword = async (req,res)=>{
             })
         }
 
-        if(newPassword !== confirmPassword){
-            return res.status(401).json({
-                success:false,
-                message:"Password not match",
-            })
-        }
+        
         //update pw in DB
         const bcryptedpassword = await bcrypt.hash(newPassword,10);
         const data = await User.findOneAndUpdate({email:email},{password:bcryptedpassword },{new:true});
