@@ -1,6 +1,5 @@
 
 const Profile = require("../models/Profile");
-const { populate } = require("../models/RatingandReview");
 const User = require("../models/User");
 const { convertSecondsToDuration } = require("../utils/secToDuration")
 const {imageUploader} = require("../utils/imageUploader");
@@ -9,16 +8,28 @@ const Course = require("../models/Course")
 exports.updateProfile=async (req,res)=>{
     try{
         //get data
-        const {dateOfBirth="" , about="" , contactNo , gender } = req.body;
+        const {dateOfBirth="" , about="" , contactNumber , gender } = req.body;
         //get user id
         const id = req.user.id;
         //validation
-        if(!contactNo || !gender ||!id){
+        if(!gender ){
             return res.status(400).json({
                 success:false,
-                message:"All feilds are required"
+                message:"Gender is required"
             });
 
+        }
+        if(!gender){
+            return res.status(400).json({
+                success:false,    
+                message:"Gender is required"
+        })
+      }
+        if(!contactNumber){
+          return res.status(400).json({
+              success:false,
+              message:"Contact Number is required"
+          })
         }
         //find profile
         const userdetails = await User.findById(id);
@@ -29,14 +40,18 @@ exports.updateProfile=async (req,res)=>{
         profiledetails.dateOfBirth=dateOfBirth;
         profiledetails.gender = gender;
         profiledetails.about = about;
-        profiledetails.contactNo = contactNo;
+        profiledetails.contactNumber = contactNumber;
 
         await profiledetails.save();
+        console.log("profile details updated successfully",profiledetails);
+
+        const updatedUserDetails = await User.findById(id).populate("additionalDetails")
         //return response
         return res.status(200).json({
             success:true,
             message:'Profile Updated Successfully',
-            profiledetails,     
+            profiledetails,
+            updatedUserDetails,     
         }) 
 
         
