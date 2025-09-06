@@ -4,15 +4,13 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
-
-
 import { changePassword } from "../../../../services/operations/Settingsapi"
 import IconBtn from "../../../common/Iconbtn"
 
 export default function UpdatePassword() {
   const { token } = useSelector((state) => state.auth)
   const navigate = useNavigate()
-
+  const { user } = useSelector((state) => state.profile)
   const [showOldPassword, setShowOldPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
 
@@ -23,9 +21,9 @@ export default function UpdatePassword() {
   } = useForm()
 
   const submitPasswordForm = async (data) => {
-    // console.log("password Data - ", data)
+    console.log("password Data - ", data)
     try {
-      await changePassword(token, data)
+      await changePassword(token, {...data,email:user.email})
     } catch (error) {
       console.log("ERROR MESSAGE - ", error.message)
     }
@@ -49,12 +47,12 @@ export default function UpdatePassword() {
                 className="form-style"
                 {...register("oldPassword", { required: true })}
               />
-              <span
+              <span 
                 onClick={() => setShowOldPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[33px] z-[10] cursor-pointer"
               >
                 {showOldPassword ? (
-                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
+                  <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF"  />
                 ) : (
                   <AiOutlineEye fontSize={24} fill="#AFB2BF" />
                 )}
@@ -79,7 +77,7 @@ export default function UpdatePassword() {
               />
               <span
                 onClick={() => setShowNewPassword((prev) => !prev)}
-                className="absolute right-3 top-[38px] z-[10] cursor-pointer"
+                className="absolute right-3 top-[33px] z-[10] cursor-pointer"
               >
                 {showNewPassword ? (
                   <AiOutlineEyeInvisible fontSize={24} fill="#AFB2BF" />
