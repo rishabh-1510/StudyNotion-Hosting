@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 
 
-import { changePassword } from "../../../../services/operations/SettingsAPI"
+import { changePassword } from "../../../../services/operations/Settingsapi"
 import IconBtn from "../../../Common/IconBtn"
 
 export default function UpdatePassword() {
