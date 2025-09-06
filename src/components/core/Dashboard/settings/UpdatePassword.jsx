@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 
 
 import { changePassword } from "../../../../services/operations/Settingsapi"
-import IconBtn from "../../../Common/IconBtn"
+import IconBtn from "../../../common/Iconbtn"
 
 export default function UpdatePassword() {
   const { token } = useSelector((state) => state.auth)
