@@ -22,7 +22,7 @@ const navigate = useNavigate();
                 </div>
             </div>
             <Iconbtn text="Edit" onclick={()=>{
-                navigate("/dashboard/setting")
+                navigate("/dashboard/settings")
             }}/>
         </div>
 
