@@ -38,7 +38,7 @@ exports.sendOtp = async (req,res)=>{
         specialChars:false,
 
         });
-        result = await otp.findOne({otp:otp});
+        result = await OTP.findOne({otp:otp});
     }
 
     const otpPayload = {
@@ -53,7 +53,7 @@ exports.sendOtp = async (req,res)=>{
     //return res
     res.status(200).json({
         success:true,
-        message:"OTP send Successfully",otp
+        message:"OTP send Successfully"
     })
 
 
